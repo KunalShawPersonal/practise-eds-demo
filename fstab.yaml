@@ -1,0 +1,7 @@
+mountpoints:
+  /:
+    url: https://content.da.live/kunalshawpersonal/practise-eds-demo/
+    type: markup
+
+folders:
+  /products/: /products/default
