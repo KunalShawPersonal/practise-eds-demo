@@ -72,6 +72,7 @@ function updateAddToCartButtonText(addToCartInstance, inCart, labels) {
 }
 
 export default async function decorate(block) {
+  console.log("HEEEY! The product-details.js block is loading correctly!");
   const product = events.lastPayload('pdp/data') ?? null;
   const labels = await fetchPlaceholders();
 
@@ -84,6 +85,10 @@ export default async function decorate(block) {
 
   // Layout
 const fragment = document.createRange().createContextualFragment(`
+  <div style="background: red; color: white; padding: 20px; text-align: center;">
+        VERIFICATION: IF YOU SEE THIS, THE NEW JS IS LIVE
+    </div>
+    <div class="product-details__alert"></div>
     <div class="product-details__alert"></div>
     <div class="product-details__wrapper">
       <div class="product-details__left-column">
@@ -420,7 +425,7 @@ const fragment = document.createRange().createContextualFragment(`
       block.querySelector(`#${target}`).classList.add('active');
     });
   });
-  
+
   return Promise.resolve();
 }
 
