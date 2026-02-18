@@ -83,7 +83,7 @@ export default async function decorate(block) {
   let isUpdateMode = false;
 
   // Layout
-  const fragment = document.createRange().createContextualFragment(`
+const fragment = document.createRange().createContextualFragment(`
     <div class="product-details__alert"></div>
     <div class="product-details__wrapper">
       <div class="product-details__left-column">
@@ -103,8 +103,26 @@ export default async function decorate(block) {
             <div class="product-details__buttons__add-to-wishlist"></div>
           </div>
         </div>
-        <div class="product-details__description"></div>
-        <div class="product-details__attributes"></div>
+
+        <div class="product-details__tabs">
+          <div class="tabs-nav" role="tablist">
+            <button class="tab-button active" role="tab" aria-selected="true" data-tab="tab-description">Description</button>
+            <button class="tab-button" role="tab" aria-selected="false" data-tab="tab-attributes">Attributes</button>
+            <button class="tab-button" role="tab" aria-selected="false" data-tab="tab-custom">Tab 3</button>
+          </div>
+          
+          <div class="tabs-content">
+            <div id="tab-description" class="tab-pane active" role="tabpanel">
+              <div class="product-details__description"></div>
+            </div>
+            <div id="tab-attributes" class="tab-pane" role="tabpanel">
+              <div class="product-details__attributes"></div>
+            </div>
+            <div id="tab-custom" class="tab-pane" role="tabpanel">
+              <p>Hello world 3</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   `);
@@ -386,6 +404,23 @@ export default async function decorate(block) {
     }
   }, { eager: true });
 
+  const tabs = block.querySelectorAll('.tab-button');
+  const panes = block.querySelectorAll('.tab-pane');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+
+      // Update Buttons
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Update Panes
+      panes.forEach(p => p.classList.remove('active'));
+      block.querySelector(`#${target}`).classList.add('active');
+    });
+  });
+  
   return Promise.resolve();
 }
 
