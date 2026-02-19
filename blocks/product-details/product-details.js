@@ -86,7 +86,7 @@ export default async function decorate(block) {
   // Layout
 const fragment = document.createRange().createContextualFragment(`
   <div style="background: red; color: white; padding: 20px; text-align: center;">
-        VERIFICATION: IF YOU SEE THIS, THE NEW JS IS LIVE
+        VERIFICATION: IF YOU SEE THIS, THE NEW JS IS LIVE !!!!!!!!
     </div>
     <div class="product-details__alert"></div>
     <div class="product-details__alert"></div>
@@ -109,27 +109,33 @@ const fragment = document.createRange().createContextualFragment(`
           </div>
         </div>
 
-        <div class="product-details__tabs">
-          <div class="tabs-nav" role="tablist">
-            <button class="tab-button active" role="tab" aria-selected="true" data-tab="tab-description">Description</button>
-            <button class="tab-button" role="tab" aria-selected="false" data-tab="tab-attributes">Attributes</button>
-            <button class="tab-button" role="tab" aria-selected="false" data-tab="tab-custom">Tab 3</button>
-          </div>
-          
-          <div class="tabs-content">
-            <div id="tab-description" class="tab-pane active" role="tabpanel">
-              <div class="product-details__description"></div>
-            </div>
-            <div id="tab-attributes" class="tab-pane" role="tabpanel">
-              <div class="product-details__attributes"></div>
-            </div>
-            <div id="tab-custom" class="tab-pane" role="tabpanel">
-              <p>Hello world 3</p>
-            </div>
-          </div>
-        </div>
-      </div>
+
+
     </div>
+    </div>
+       <div class="product-details__tabs">
+    <div class="tabs-nav" role="tablist">
+      <button class="tab-button active" role="tab" data-tab="tab-overview">Overview</button>
+      <button class="tab-button" role="tab" data-tab="tab-specs">Specs</button>
+      <button class="tab-button" role="tab" data-tab="tab-supplies">Supplies</button>
+      <button class="tab-button" role="tab" data-tab="tab-reviews">Reviews</button>
+      <button class="tab-button" role="tab" data-tab="tab-compare">Compare</button>
+      <button class="tab-button" role="tab" data-tab="tab-qa">Q&A</button>
+    </div>
+    
+    <div class="tabs-content">
+      <div id="tab-overview" class="tab-pane active" role="tabpanel">
+        <div class="product-details__description"></div>
+      </div>
+      <div id="tab-specs" class="tab-pane" role="tabpanel">
+        <div class="product-details__attributes"></div>
+      </div>
+      <div id="tab-supplies" class="tab-pane" role="tabpanel">Supplies content goes here</div>
+      <div id="tab-reviews" class="tab-pane" role="tabpanel">Reviews content goes here</div>
+      <div id="tab-compare" class="tab-pane" role="tabpanel">Compare content goes here</div>
+      <div id="tab-qa" class="tab-pane" role="tabpanel">Q&A content goes here</div>
+    </div>
+  </div>
   `);
 
   const $alert = fragment.querySelector('.product-details__alert');

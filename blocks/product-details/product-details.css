@@ -118,57 +118,67 @@
 
 /* --- TABS SYSTEM --- */
 
+/* --- TABS SYSTEM - XEROX STYLE --- */
+
 .product-details__tabs {
   margin-top: var(--spacing-xxbig);
-  border-top: 1px solid var(--color-neutral-200);
 }
 
 .tabs-nav {
   display: flex;
-  gap: var(--spacing-medium);
-  border-bottom: 1px solid var(--color-neutral-300);
+  width: 100%;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f8f8f8;
   margin-bottom: var(--spacing-medium);
 }
 
 .tab-button {
-  background: none;
-  border: none;
-  padding: var(--spacing-small) var(--spacing-medium);
+  flex: 1;
+  background-color: #f8f8f8; /* Light gray for inactive tabs */
+  border: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0; /* Matches the nav line */
+  margin-left: -1px;
+  padding: 15px 5px;
   cursor: pointer;
-  font-size: var(--type-body-m-size);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-neutral-600);
-  border-bottom: 3px solid transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
   transition: all 0.2s ease;
+  position: relative;
 }
 
-.tab-button:hover {
-  color: var(--color-neutral-900);
+.tab-button:first-child {
+  margin-left: 0;
 }
 
+/* Active State Styles */
 .tab-button.active {
-  color: var(--color-neutral-900);
-  border-bottom-color: var(--color-neutral-900);
+  background-color: #ffffff;
+  color: #000;
+  /* MOVE RED LINE TO BOTTOM */
+  border-top: 1px solid #e0e0e0; 
+  border-bottom: 4px solid #b01414; 
+  z-index: 2;
 }
 
-/* Tab Content Visibility */
+/* Hover state for better UX */
+.tab-button:not(.active):hover {
+  background-color: #eeeeee;
+}
+
+/* Tab Content */
 .tab-pane {
   display: none;
-  padding: var(--spacing-small) 0;
+  padding: 40px 0; /* Extra space for that clean look in screenshot 1 */
 }
 
 .tab-pane.active {
   display: block;
-  /* subtle fade-in effect */
   animation: tab-fade-in 0.3s ease-in-out;
 }
 
 @keyframes tab-fade-in {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Remove the old top margin from attributes since they are now in a tab */
-.product-details__attributes {
-  margin-top: 0;
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
