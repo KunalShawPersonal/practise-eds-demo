@@ -85,21 +85,15 @@ export default async function decorate(block) {
 
   // Layout
 const fragment = document.createRange().createContextualFragment(`
-  <div style="background: red; color: white; padding: 20px; text-align: center;">
-        VERIFICATION: IF YOU SEE THIS, THE NEW JS IS LIVE !!!!!!!!
-    </div>
     <div class="product-details__alert"></div>
-    <div class="product-details__alert"></div>
-    <div class="product-details__wrapper">
-      <div class="product-details__left-column">
-        <div class="product-details__gallery"></div>
-      </div>
-      <div class="product-details__right-column">
+    
+    <div class="product-details__top-bar">
+      <div class="product-details__top-bar-left">
         <div class="product-details__header"></div>
         <div class="product-details__price"></div>
-        <div class="product-details__gallery"></div>
-        <div class="product-details__short-description"></div>
-        <div class="product-details__gift-card-options"></div>
+      </div>
+      
+      <div class="product-details__top-bar-right">
         <div class="product-details__configuration">
           <div class="product-details__options"></div>
           <div class="product-details__quantity"></div>
@@ -108,40 +102,51 @@ const fragment = document.createRange().createContextualFragment(`
             <div class="product-details__buttons__add-to-wishlist"></div>
           </div>
         </div>
-
-
-
+      </div>
     </div>
-    </div>
-       <div class="product-details__tabs">
-    <div class="tabs-nav" role="tablist">
-      <button class="tab-button active" role="tab" data-tab="tab-overview">Overview</button>
-      <button class="tab-button" role="tab" data-tab="tab-specs">Specs</button>
-      <button class="tab-button" role="tab" data-tab="tab-supplies">Supplies</button>
-      <button class="tab-button" role="tab" data-tab="tab-reviews">Reviews</button>
-      <button class="tab-button" role="tab" data-tab="tab-compare">Compare</button>
-      <button class="tab-button" role="tab" data-tab="tab-qa">Q&A</button>
-    </div>
+
+    <div class="product-details__tabs">
+      <div class="tabs-nav" role="tablist">
+        <button class="tab-button active" role="tab" data-tab="tab-overview">Overview</button>
+        <button class="tab-button" role="tab" data-tab="tab-specs">Specs</button>
+        <button class="tab-button" role="tab" data-tab="tab-supplies">Supplies</button>
+        <button class="tab-button" role="tab" data-tab="tab-reviews">Reviews</button>
+        <button class="tab-button" role="tab" data-tab="tab-compare">Compare</button>
+        <button class="tab-button" role="tab" data-tab="tab-qa">Q&A</button>
+      </div>
     
-    <div class="tabs-content">
-      <div id="tab-overview" class="tab-pane active" role="tabpanel">
-        <div class="product-details__description"></div>
+      <div class="tabs-content">
+        <div id="tab-overview" class="tab-pane active" role="tabpanel">
+          <div class="product-details__wrapper">
+            <div class="product-details__left-column">
+              <div class="product-details__gallery"></div>
+            </div>
+            <div class="product-details__right-column">
+              <div class="product-details__header__tab"></div>
+              <div class="product-details__price__tab"></div>
+              <div class="product-details__gallery"></div>
+              <div class="product-details__short-description"></div>
+              <div class="product-details__gift-card-options"></div>
+              </div>
+          </div>
+        </div>
+        <div id="tab-specs" class="tab-pane" role="tabpanel">
+          <div class="product-details__attributes"></div>
+        </div>
+        <div id="tab-supplies" class="tab-pane" role="tabpanel">Supplies content goes here</div>
+        <div id="tab-reviews" class="tab-pane" role="tabpanel">Reviews content goes here</div>
+        <div id="tab-compare" class="tab-pane" role="tabpanel">Compare content goes here</div>
+        <div id="tab-qa" class="tab-pane" role="tabpanel">Q&A content goes here</div>
       </div>
-      <div id="tab-specs" class="tab-pane" role="tabpanel">
-        <div class="product-details__attributes"></div>
-      </div>
-      <div id="tab-supplies" class="tab-pane" role="tabpanel">Supplies content goes here</div>
-      <div id="tab-reviews" class="tab-pane" role="tabpanel">Reviews content goes here</div>
-      <div id="tab-compare" class="tab-pane" role="tabpanel">Compare content goes here</div>
-      <div id="tab-qa" class="tab-pane" role="tabpanel">Q&A content goes here</div>
     </div>
-  </div>
-  `);
+`);
 
   const $alert = fragment.querySelector('.product-details__alert');
   const $gallery = fragment.querySelector('.product-details__gallery');
   const $header = fragment.querySelector('.product-details__header');
   const $price = fragment.querySelector('.product-details__price');
+  const $headerTab = fragment.querySelector('.product-details__header__tab');
+  const $priceTab = fragment.querySelector('.product-details__price__tab');
   const $galleryMobile = fragment.querySelector('.product-details__right-column .product-details__gallery');
   const $shortDescription = fragment.querySelector('.product-details__short-description');
   const $options = fragment.querySelector('.product-details__options');
@@ -220,6 +225,12 @@ const fragment = document.createRange().createContextualFragment(`
     // Price
     pdpRendered.render(ProductPrice, {})($price),
 
+    // Header inside tab
+    pdpRendered.render(ProductHeader, {})($headerTab),
+
+    // Price inside tab
+    pdpRendered.render(ProductPrice, {})($priceTab),
+
     // Short Description
     pdpRendered.render(ProductShortDescription, {})($shortDescription),
 
@@ -243,7 +254,7 @@ const fragment = document.createRange().createContextualFragment(`
     pdpRendered.render(ProductGiftCardOptions, {})($giftCardOptions),
 
     // Description
-    pdpRendered.render(ProductDescription, {})($description),
+    // pdpRendered.render(ProductDescription, {})($description),
 
     // Attributes
     pdpRendered.render(ProductAttributes, {})($attributes),
